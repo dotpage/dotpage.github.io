@@ -1,15 +1,20 @@
 window.onload = function () {
     var nav = $('.nav-block');
     var menu = $('.menu');
+    var close =$('.close');
     var modal = $('.modal');
     var links = $('.nav-list__link');
     var moveDown = $('.img-double-down');
 
     menu.on('click', function () {
-        if (nav.hasClass("visible")) {
-            closeMenu();
-        } else {
+        if (!nav.hasClass("visible")) {
             openMenu();
+        }
+    });
+
+    close.on('click', function () {
+        if (modal.hasClass("visible")) {
+            closeMenu();
         }
     });
 
@@ -19,9 +24,10 @@ window.onload = function () {
         }
     });
 
+
+
     links.on('click', function (e) {
         e.preventDefault();
-        // $('.nav-list__link').removeClass('active').filter(this).addClass('active');
         var $id = $(this).attr('href');
         var offSet = $($id).offset().top;
         moveScroll(offSet);
@@ -39,7 +45,7 @@ window.onload = function () {
         loop: true,
     });
 
-    function openMenu(params) {
+    function openMenu() {
         nav.addClass("visible").animate({
             left: 0,
         }, 200);
